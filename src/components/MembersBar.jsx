@@ -2,6 +2,7 @@ import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useCollection } from "@/hooks/useCollection";
 import { Skeleton } from "@/shadcn/components/ui/skeleton";
 import { useAuthContext } from "@/hooks/useAuthContext";
+import { useUsersContext } from "@/hooks/useUsersContext";
 
 function MemberSkeleton() {
   return (
@@ -12,13 +13,9 @@ function MemberSkeleton() {
   );
 }
 
-export default function MembersBar({
-  setSelectedChat,
-  setChatIsOpen,
-  chats,
-  users,
-}) {
+export default function MembersBar({ setSelectedChat, setChatIsOpen, chats }) {
   const { user } = useAuthContext();
+  const { users } = useUsersContext();
   const usersLength = Number(localStorage.getItem("usersLength"));
 
   const openChat = (userId, userName) => {
@@ -43,7 +40,7 @@ export default function MembersBar({
   }, [users]);
 
   return (
-    <aside className="h-screen w-[200px] border border-border p-5">
+    <aside className="relative h-screen w-[200px] border border-border p-5">
       <h2 className="font-medium text-lg mb-5">Membros</h2>
       {users
         ? users

@@ -96,106 +96,108 @@ export default function Sidebar({
   };
 
   return (
-    <nav className="h-screen w-[250px] bg-accent border border-border">
-      <div className="p-5">
-        <Logo size="sm" />
-      </div>
-      <div className="flex gap-3 p-5">
-        <Avatar>
-          <AvatarImage src={user.photoURL} />
-          <AvatarFallback className="bg-primary/50">
-            {getInitials(user.displayName)}
-          </AvatarFallback>
-        </Avatar>
-        <div>
-          <p className="font-medium">{user.displayName}</p>
-          <p className="text-muted-foreground/75 text-sm">Premium account</p>
+    <nav className="relative overflow-y-auto min-h-[calc(100vh_-_64px)] hidden sm:flex sm:flex-col sm:justify-between h-full w-[250px] bg-accent border border-border">
+      <div className="fixed h-[calc(100vh_-_96px)] w-[250px] sm:flex-grow sm:flex sm:flex-col sm:justify-between">
+        <div className="p-5">
+          <Logo size="sm" />
         </div>
-      </div>
-      {userOptions.map((option) => (
-        <div
-          key={option.route}
-          role="button"
-          className="px-5 py-1.5 flex items-center gap-3"
-          onClick={() => navigate(option.route)}
-        >
-          {option.icon}
-          <p className="text-md">{option.name}</p>
+        <div className="flex gap-3 p-5">
+          <Avatar>
+            <AvatarImage src={user.photoURL} />
+            <AvatarFallback className="bg-primary/50">
+              {getInitials(user.displayName)}
+            </AvatarFallback>
+          </Avatar>
+          <div>
+            <p className="font-medium">{user.displayName}</p>
+            <p className="text-muted-foreground/75 text-sm">Premium account</p>
+          </div>
         </div>
-      ))}
-
-      <Separator className="my-4" />
-
-      <h2 className="font-semibold text-xl px-5 mb-4">Projetos</h2>
-
-      {projectOptions.map((option) => (
-        <div
-          key={option.route}
-          role="button"
-          className="px-5 py-1.5 flex items-center gap-3"
-          onClick={() => navigate(option.route)}
-        >
-          {option.icon}
-          <p className="text-md font-medium">{option.name}</p>
-        </div>
-      ))}
-
-      <Separator className="my-4" />
-
-      <h2 className="font-semibold text-xl px-5 mb-4">Etiqueta</h2>
-
-      {labelOptions.map((option) => (
-        <div
-          key={option.value}
-          role="button"
-          className="px-5 py-1.5 flex items-center justify-between"
-        >
+        {userOptions.map((option) => (
           <div
-            className="flex gap-3"
-            onClick={() => setSelectedPriority(option.value)}
+            key={option.route}
+            role="button"
+            className="px-5 py-1.5 flex items-center gap-3"
+            onClick={() => navigate(option.route)}
           >
             {option.icon}
-            <p
-              className={`text-md/90 ${
-                selectedPriority === option.value ? "font-semibold" : ""
-              }`}
-            >
-              {option.name}
-            </p>
+            <p className="text-md">{option.name}</p>
           </div>
-          {option.value === selectedPriority && (
-            <Cross2Icon
-              role="button"
-              onClick={() => setSelectedPriority(null)}
-            />
-          )}
+        ))}
+
+        <Separator className="my-4" />
+
+        <h2 className="font-semibold text-xl px-5 mb-4">Projetos</h2>
+
+        {projectOptions.map((option) => (
+          <div
+            key={option.route}
+            role="button"
+            className="px-5 py-1.5 flex items-center gap-3"
+            onClick={() => navigate(option.route)}
+          >
+            {option.icon}
+            <p className="text-md font-medium">{option.name}</p>
+          </div>
+        ))}
+
+        <Separator className="my-4" />
+
+        <h2 className="font-semibold text-xl px-5 mb-4">Etiqueta</h2>
+
+        {labelOptions.map((option) => (
+          <div
+            key={option.value}
+            role="button"
+            className="px-5 py-1.5 flex items-center justify-between"
+          >
+            <div
+              className="flex gap-3"
+              onClick={() => setSelectedPriority(option.value)}
+            >
+              {option.icon}
+              <p
+                className={`text-md/90 ${
+                  selectedPriority === option.value ? "font-semibold" : ""
+                }`}
+              >
+                {option.name}
+              </p>
+            </div>
+            {option.value === selectedPriority && (
+              <Cross2Icon
+                role="button"
+                onClick={() => setSelectedPriority(null)}
+              />
+            )}
+          </div>
+        ))}
+
+        <Separator className="my-4" />
+
+        <div className="px-5">
+          {" "}
+          <Button
+            size="noPadding"
+            variant="ghost"
+            onClick={handleLogout}
+            className="opacity-50 py-2.5"
+          >
+            <InfoCircledIcon className="w-4 h-4 mr-2" />
+            Central de Ajuda
+          </Button>
+          <Button
+            size="noPadding"
+            variant="ghost"
+            onClick={handleLogout}
+            className="opacity-50 py-2.5"
+          >
+            <ExitIcon className="w-4 h-4 mr-2" />
+            Sair da conta
+          </Button>
         </div>
-      ))}
-
-      <Separator className="my-4" />
-
-      <div className="px-5">
-        {" "}
-        <Button
-          size="noPadding"
-          variant="ghost"
-          onClick={handleLogout}
-          className="opacity-50"
-        >
-          <InfoCircledIcon className="w-4 h-4 mr-2" />
-          Central de Ajuda
-        </Button>
-        <Button
-          size="noPadding"
-          variant="ghost"
-          onClick={handleLogout}
-          className="opacity-50"
-        >
-          <ExitIcon className="w-4 h-4 mr-2" />
-          Sair da conta
-        </Button>
+        {rerender && <span className="hidden"></span>}
       </div>
-      {rerender && <span className="hidden"></span>}
     </nav>
   );
 }
