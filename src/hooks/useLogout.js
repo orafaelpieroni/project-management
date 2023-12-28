@@ -16,9 +16,9 @@ export const useLogout = () => {
 
     // Sign the user out
     try {
-      const { uid } = user;
-      const userRef = doc(db, "users", uid);
-      await updateDoc(userRef, { online: false });
+      // const { uid } = user;
+      // const userRef = doc(db, "users", uid);
+      // await updateDoc(userRef, { online: false });
 
       await signOut(auth);
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button } from "@/shadcn/components/ui/button";
 import { Input } from "@/shadcn/components/ui/input";
 import { Link } from "react-router-dom";
@@ -10,7 +10,7 @@ export default function Signup() {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { signup, error, isPending } = useSignup();
+  const { signup, isPending } = useSignup();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,25 +18,8 @@ export default function Signup() {
   };
 
   return (
-    <div className="flex gap-20 h-screen w-full px-40 py-28">
-      <div className="w-1/2 bg-muted rounded-xl p-12">
-        <Logo />
-        <h2 className="mt-24 text-4xl leading-[50px] font-medium">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-        </h2>
-        <p className="mt-10 text-muted-foreground">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore
-          debitis dolore, dicta fugiat iure quia! Hic facilis aut ducimus
-          aliquam blanditiis ex ea. Ipsa omnis quas impedit maiores ad unde?
-        </p>
-        <div className="bg-foreground text-background p-8 rounded-xl mt-16 leading-8">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet
-          quasi molestias molestiae, pariatur, doloribus neque saepe sit hic
-          quis sequi nulla non quidem accusantium harum ipsa minima adipisci
-          iure obcaecati!
-        </div>
-      </div>
-      <div className="flex flex-col justify-center w-1/2 px-20">
+    <div className="flex flex-col lg:flex-row-reverse  gap-20 h-screen w-full lg:px-20 lg:py-20">
+      <div className="flex flex-col justify-center lg:w-1/2 px-20">
         <div>
           <h1 className="text-3xl font-medium">Cadastre-se agora</h1>
           <p className="mt-4 text-muted-foreground font-normal text-lg">
@@ -81,6 +64,23 @@ export default function Signup() {
               Entre agora.
             </Link>
           </div>
+        </div>
+      </div>
+      <div className="lg:w-1/2 bg-muted rounded-xl p-12">
+        <Logo />
+        <h2 className="mt-10 text-4xl leading-[50px] font-medium">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+        </h2>
+        <p className="mt-6 text-muted-foreground">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore
+          debitis dolore, dicta fugiat iure quia! Hic facilis aut ducimus
+          aliquam blanditiis ex ea. Ipsa omnis quas impedit maiores ad unde?
+        </p>
+        <div className="bg-foreground text-background p-8 rounded-xl mt-16 leading-8">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet
+          quasi molestias molestiae, pariatur, doloribus neque saepe sit hic
+          quis sequi nulla non quidem accusantium harum ipsa minima adipisci
+          iure obcaecati!
         </div>
       </div>
     </div>

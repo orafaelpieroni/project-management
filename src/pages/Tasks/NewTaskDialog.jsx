@@ -52,12 +52,12 @@ export default function NewTaskDialog({ children, open, setOpen }) {
     label: user.name,
   }));
 
-  const tagOptions = teamDoc?.tags.map((tag) => ({ value: tag, label: tag }));
+  const tagOptions = teamDoc?.tags?.map((tag) => ({ value: tag, label: tag }));
 
   const addNewTag = async (e) => {
     e.preventDefault();
     if (!newTag) return;
-    await updateTeam("NlBY6KqsNNO4zDgO3a15", {
+    await updateTeam(userDoc.teamId, {
       tags: arrayUnion(newTag),
     });
     toast({

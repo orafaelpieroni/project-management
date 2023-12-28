@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { doc, setDoc, arrayUnion } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { auth, db, timestamp } from "../firebase/config";
 import { useFirestore } from "./useFirestore";
 import { useAuthContext } from "./useAuthContext";
@@ -10,7 +10,7 @@ export const useSignup = () => {
   const [error, setError] = useState(null);
   const [isPending, setIsPending] = useState(false);
   const { dispatch } = useAuthContext();
-  const { updateDocument } = useFirestore("users");
+  const { addDocument: addTeam } = useFirestore("teams");
 
   const signup = async (email, password, name) => {
     setError(null);
@@ -27,19 +27,30 @@ export const useSignup = () => {
 
       // Add display name to user
       await updateProfile(auth.currentUser, { displayName: name });
+      const createdAt = timestamp;
 
-      // Dispatch login action
-      dispatch({ type: "LOGIN", payload: res.user });
+      const res2 = await addTeam({
+        tags: [],
+        "column-1": [],
+        "column-2": [],
+        "column-3": [],
+        "column-4": [],
+      });
+
+      const teamId = res2.payload;
 
       // Create a user document
-      const createdAt = timestamp;
-      setDoc(doc(db, "users", res.user.uid), {
+      await setDoc(doc(db, "users", res.user.uid), {
         id: res.user.uid,
         online: true,
         createdAt,
         email: email,
         name: name,
+        teamId,
       });
+
+      // Dispatch login action
+      dispatch({ type: "LOGIN", payload: res.user });
 
       // Update state
       if (!isCancelled) {

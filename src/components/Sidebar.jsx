@@ -97,7 +97,7 @@ export default function Sidebar({
 
   return (
     <nav className="relative overflow-y-auto min-h-[calc(100vh_-_64px)] hidden sm:flex sm:flex-col sm:justify-between h-full w-[250px] bg-accent border border-border">
-      <div className="fixed h-[calc(100vh_-_96px)] w-[250px] sm:flex-grow sm:flex sm:flex-col sm:justify-between">
+      <div className="fixed max-h-full overflow-y-auto w-[250px] sm:flex-grow sm:flex sm:flex-col sm:justify-between">
         <div className="p-5">
           <Logo size="sm" />
         </div>
@@ -125,9 +125,9 @@ export default function Sidebar({
           </div>
         ))}
 
-        <Separator className="my-4" />
+        <Separator className="my-3" />
 
-        <h2 className="font-semibold text-xl px-5 mb-4">Projetos</h2>
+        <h2 className="font-medium text-lg px-5 mb-2">Projetos</h2>
 
         {projectOptions.map((option) => (
           <div
@@ -137,13 +137,13 @@ export default function Sidebar({
             onClick={() => navigate(option.route)}
           >
             {option.icon}
-            <p className="text-md font-medium">{option.name}</p>
+            <p className="text-md">{option.name}</p>
           </div>
         ))}
 
-        <Separator className="my-4" />
+        <Separator className="my-3" />
 
-        <h2 className="font-semibold text-xl px-5 mb-4">Etiqueta</h2>
+        <h2 className="font-medium text-lg px-5 mb-2">Etiqueta</h2>
 
         {labelOptions.map((option) => (
           <div
@@ -152,7 +152,7 @@ export default function Sidebar({
             className="px-5 py-1.5 flex items-center justify-between"
           >
             <div
-              className="flex gap-3"
+              className="flex items-center gap-3"
               onClick={() => setSelectedPriority(option.value)}
             >
               {option.icon}
@@ -173,7 +173,7 @@ export default function Sidebar({
           </div>
         ))}
 
-        <Separator className="my-4" />
+        <Separator className="my-3" />
 
         <div className="px-5">
           {" "}
@@ -195,6 +195,7 @@ export default function Sidebar({
             <ExitIcon className="w-4 h-4 mr-2" />
             Sair da conta
           </Button>
+          <div className="py-3"></div>
         </div>
         {rerender && <span className="hidden"></span>}
       </div>

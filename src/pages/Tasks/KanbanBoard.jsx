@@ -214,8 +214,8 @@ export default function KanbanBoard({
 
             return (
               shouldReturnTrue &&
-              (task.title.toLowerCase().includes(search.toLowerCase()) ||
-                task.description.toLowerCase().includes(search.toLowerCase()))
+              (task?.title.toLowerCase().includes(search.toLowerCase()) ||
+                task?.description.toLowerCase().includes(search.toLowerCase()))
             );
           });
 
